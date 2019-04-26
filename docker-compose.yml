@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+
+  springboot-app:
+    build: .
+    ports:
+      - 8086:8086
+    networks:
+      - springboot-mysql
+    depends_on:
+      - mysql-dev
+
+  mysql-dev:
+    image: mysql:8.0.2
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: demodb
+    ports:
+      - 3306:3306
+    networks:
+      - springboot-mysql
+    volumes:
+      - ~/java/springboot/data/mysql-data:/var/lib/mysql
+
+networks:
+  springboot-mysql:
