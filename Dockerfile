@@ -22,7 +22,7 @@ WORKDIR /usr/src/app
 
 # install maven dependency packages (keep in image)
 COPY ./ /usr/src/app
-RUN mvn install -Dmaven.test.skip=true
-RUN mvn package
+RUN mvn clean install -Dmaven.test.skip=true
+
 EXPOSE 8086
 ENTRYPOINT ["java", "-jar", "/usr/src/app/target/spring-boot-mysql-docker.jar"]
